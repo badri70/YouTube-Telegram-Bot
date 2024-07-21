@@ -1,10 +1,14 @@
+from os import getenv
+from dotenv import load_dotenv
 import yt_dlp
-import conf
+
+load_dotenv()
+PATH = getenv("SAVE_PATH")
 
 def upload(url):
     ydl_opts = {
         'format': 'mp4',
-        'outtmpl': f'{conf.SAVE_PATH}/%(title)s.%(ext)s',
+        'outtmpl': f'{PATH}/%(title)s.%(ext)s',
     }
     try:
         with yt_dlp.YoutubeDL(ydl_opts) as ydl:

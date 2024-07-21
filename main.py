@@ -1,15 +1,19 @@
 import logging
 import asyncio
+from os import getenv
+from dotenv import load_dotenv
 from aiogram import Bot, Dispatcher
-import conf
 from handlers import router
 
 
+load_dotenv()
+
 dp = Dispatcher()
-         
-         
+TOKEN = getenv('BOT_TOKEN')
+
+
 async def main():
-    bot = Bot(token=conf.BOT_TOKEN)
+    bot = Bot(token=TOKEN)
     dp.include_router(router=router)
     await dp.start_polling(bot)
 
@@ -19,5 +23,6 @@ if __name__ == "__main__":
     try:
         asyncio.run(main())
     except:
-        print("Exit")
+        print('Exit')
+
 
